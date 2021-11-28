@@ -1,17 +1,26 @@
-<mxfile host="app.diagrams.net" modified="2021-11-28T16:40:35.174Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="6TY_928xseFpeyVLQ49B" version="15.8.6" type="gitlab">
+<mxfile host="app.diagrams.net" modified="2021-11-28T16:48:33.426Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36" etag="0X17xgesdTv9HQY4rHNz" version="15.8.6" type="gitlab">
   <diagram id="pGH3MJxvGGagiAN2fXrj" name="Page-1">
     <mxGraphModel dx="1422" dy="754" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="UijCjb44JlrkgClq5106-1" value="Board" style="swimlane;" vertex="1" parent="1">
-          <mxGeometry x="420" y="190" width="200" height="200" as="geometry" />
+          <mxGeometry x="80" y="40" width="200" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="UijCjb44JlrkgClq5106-2" value="Public:&lt;br&gt;void turnColorSetter() *" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="UijCjb44JlrkgClq5106-1">
+        <mxCell id="UijCjb44JlrkgClq5106-2" value="Public:&lt;br&gt;void turnColorSetter() *&lt;br&gt;char** getBoard()" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="UijCjb44JlrkgClq5106-1">
           <mxGeometry y="20" width="200" height="90" as="geometry" />
         </mxCell>
         <mxCell id="UijCjb44JlrkgClq5106-3" value="Private:&lt;br&gt;bool _turnColor&lt;br&gt;char** _board" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
-          <mxGeometry x="420" y="300" width="200" height="90" as="geometry" />
+          <mxGeometry x="80" y="150" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="UijCjb44JlrkgClq5106-6" value="Soldier" style="swimlane;" vertex="1" parent="1">
+          <mxGeometry x="530" y="40" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="UijCjb44JlrkgClq5106-7" value="Public:&lt;br&gt;void setCord(char x, char y)&lt;br&gt;char getX()&lt;br&gt;char getY()&lt;br&gt;char getName()&lt;br&gt;virtual movePoss(char x, char y) = 0&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="UijCjb44JlrkgClq5106-6">
+          <mxGeometry y="20" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="UijCjb44JlrkgClq5106-8" value="Private:&lt;br&gt;char _x&lt;br&gt;char _y&lt;br&gt;char _name" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="UijCjb44JlrkgClq5106-6">
+          <mxGeometry y="110" width="200" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
