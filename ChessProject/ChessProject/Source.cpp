@@ -4,6 +4,7 @@ It is recommended to use the following code in your project,
 in order to read and write information from and to the Backend
 */
 
+#include "Rook.h"
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
@@ -16,7 +17,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-
+	Rook check('a', '1', 'r', false);
 	
 	Pipe p;
 	bool isConnect = p.connect();
@@ -46,7 +47,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	strcpy_s(msgToGraphics, "#######R################################################rnbkqbnr1"); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
@@ -55,22 +56,33 @@ void main()
 
 	while (msgFromGraphics != "quit")
 	{
+		string colour[8] = {"#######R", "########", "########", "########", "########", "########", "########", "rnbkqbnr"};
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
 		// YOUR CODE
-		strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
-
+		char answer[2];
+		try 
+		{
+			check.isValidMove(msgFromGraphics, colour);
+		}
+		catch(const char e)
+		{
+			answer[0] = e;
+			answer[1] = NULL;
+		}
+		strcpy_s(msgToGraphics, answer); // msgToGraphics should contain the result of the operation
+		
 		/******* JUST FOR EREZ DEBUGGING ******/
-		int r = rand() % 10; // just for debugging......
-		msgToGraphics[0] = (char)(1 + '0');
-		msgToGraphics[1] = 0;
+		//int r = rand() % 10; // just for debugging......
+		//msgToGraphics[0] = (char)(1 + '0');
+		//msgToGraphics[1] = 0;
 		/******* JUST FOR EREZ DEBUGGING ******/
-
-
+		
+		
 		// return result to graphics		
 		p.sendMessageToGraphics(msgToGraphics);   
-
+		
 		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
 	}

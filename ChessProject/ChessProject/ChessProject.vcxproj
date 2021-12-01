@@ -22,11 +22,14 @@
     <ClInclude Include="FrontedText.h" />
     <ClInclude Include="moveExceptions.h" />
     <ClInclude Include="Pipe.h" />
+    <ClInclude Include="Rook.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FrontedText.cpp" />
+    <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp" />

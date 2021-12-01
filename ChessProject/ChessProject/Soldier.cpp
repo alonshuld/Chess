@@ -20,6 +20,12 @@ char Soldier::getY() const
 	return this->_y;
 }
 
+void Soldier::checkIfDestNotOwn(const char x, const char y, const string* board) const
+{
+	if (this->_color == colorOfSoldier(x, y, board))
+		throw moveException::checkDestSoldier();
+}
+
 void Soldier::checkIfNotSameIndex(const char x, const char y) const
 {
 	if (x == this->_x && y == this->_y)
@@ -32,16 +38,18 @@ void Soldier::checkIfCordsValid(const char x, const char y) const
 		throw moveException::checkIndex();
 }
 
-bool Soldier::colorOfSoldier(const char x, const char y, const char** board) const
+bool Soldier::colorOfSoldier(const char x, const char y, const string* board) const
 {
-	if ('A' <= board[turnCordToInt(x)][turnCordToInt(y)] && board[turnCordToInt(x)][turnCordToInt(y)] <= 'Z')
+	int xIndex = turnCordToInt(x);
+	int yIndex = turnCordToInt(y);
+	if ('A' <= board[yIndex][xIndex] && board[yIndex][xIndex] <= 'Z')
 		return false;
 	return true;
 }
 
 int Soldier::turnCordToInt(const char cord) const
 {
-	if ('a' <= cord || cord <= 'g')
+	if ('a' <= cord && cord <= 'g')
 		return ((int)cord) - ASCII_LETTERS;
 	return ((int)cord) - ASCII_NUMBERS - ONE; // -1 because we return index and the y cords of the board starts at 1
 }
