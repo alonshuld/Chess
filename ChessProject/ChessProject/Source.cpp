@@ -17,7 +17,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-	Rook check('a', '1', 'r', false);
+	Rook check('h', '7', 'r', false);
 	
 	Pipe p;
 	bool isConnect = p.connect();
@@ -47,16 +47,16 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "#######R################################################rnbkqbnr1"); // just example...
+	strcpy_s(msgToGraphics, "R######RR######R###############################r########rNbkqbNr1"); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
-
+	
 	while (msgFromGraphics != "quit")
 	{
-		string colour[8] = {"#######R", "########", "########", "########", "########", "########", "########", "rnbkqbnr"};
+		string colour[8] = { "rNbkqbNr", "########", "#######r", "########", "########", "########", "R######R", "R######R" };
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		

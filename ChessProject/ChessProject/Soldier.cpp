@@ -42,14 +42,17 @@ bool Soldier::colorOfSoldier(const char x, const char y, const string* board) co
 {
 	int xIndex = turnCordToInt(x);
 	int yIndex = turnCordToInt(y);
+	char check = board[yIndex][xIndex];
 	if ('A' <= board[yIndex][xIndex] && board[yIndex][xIndex] <= 'Z')
 		return false;
-	return true;
+	else if ('a' <= board[yIndex][xIndex] && board[yIndex][xIndex] <= 'z')
+		return true;
+	return !this->_color;
 }
 
 int Soldier::turnCordToInt(const char cord) const
 {
-	if ('a' <= cord && cord <= 'g')
+	if ('a' <= cord && cord <= 'h')
 		return ((int)cord) - ASCII_LETTERS;
 	return ((int)cord) - ASCII_NUMBERS - ONE; // -1 because we return index and the y cords of the board starts at 1
 }

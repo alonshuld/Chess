@@ -16,13 +16,10 @@ void Rook::isValidMove(const string cords, const string* board)
 	char currentY = getY();
 	checkIfCordsValid(newX, newY);
 	checkIfNotSameIndex(newX, newY);
-	if ((getX() == newX && getY() != newY) || (getX() != newX && getY() == newY))
+	if ((currentX == newX && currentY != newY) || (currentX != newX && currentY == newY))
 	{
 		checkIfDestNotOwn(newX, newY, board);
-		if(newX != getX())
-			checkIfNotRunOver(turnCordToInt(currentX) + 1, turnCordToInt(currentY), newX, newY, board);
-		else
-			checkIfNotRunOver(turnCordToInt(currentX), turnCordToInt(currentY) + 1, newX, newY - 1, board);
+		checkIfNotRunOver(turnCordToInt(currentX), turnCordToInt(currentY), newX, newY, board);
 	}
 	else
 	{
@@ -36,14 +33,34 @@ void Rook::checkIfNotRunOver(const int startX, const int startY, const char x, c
 {
 	int indexX = turnCordToInt(x);
 	int indexY = turnCordToInt(y);
-	for (int counter = startY; counter < indexY; counter++)
+	if (indexX == startX)
 	{
-		for (int secCounter = startX; secCounter < indexX; secCounter++)
+		if (startY > indexY)
 		{
-			if (board[counter][secCounter] != '#')
-			{
-				throw moveException::invalidMove();
-			}
+			for (int i = indexY + 1; i < startY; i++)
+				if (board[i][startX] != '#')
+					throw moveException::invalidMove();
+		}
+		else
+		{
+			for (int i = startY + 1; i < indexY; i++)
+				if (board[i][startX] != '#')
+					throw moveException::invalidMove();
+		}
+	}
+	else
+	{
+		if (startX > indexX)
+		{
+			for (int i = indexX + 1; i < startX; i++)
+				if (board[startY][i] != '#')
+					throw moveException::invalidMove();
+		}
+		else
+		{
+			for (int i = startX + 1; i < indexX; i++)
+				if (board[startY][i] != '#')
+					throw moveException::invalidMove();
 		}
 	}
 }
