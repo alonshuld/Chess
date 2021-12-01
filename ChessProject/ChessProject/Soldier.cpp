@@ -49,7 +49,7 @@ bool Soldier::colorOfSoldier(const char x, const char y, const string* board) co
 
 int Soldier::turnCordToInt(const char cord) const
 {
-	if ('a' <= cord && cord <= 'g')
+	if ('a' <= cord && cord <= 'h')
 		return ((int)cord) - ASCII_LETTERS;
 	return ((int)cord) - ASCII_NUMBERS - ONE; // -1 because we return index and the y cords of the board starts at 1
 }
