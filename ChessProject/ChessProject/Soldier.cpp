@@ -69,6 +69,18 @@ int Soldier::turnCordToInt(const char cord) const
 	return ((int)cord) - ASCII_NUMBERS - ONE; // -1 because we return index and the y cords of the board starts at 1
 }
 
+bool Soldier::operator==(const Soldier& other)
+{
+	if (this->_x == other._x && this->_y == other._y)
+		return true;
+	return false;
+}
+
+bool Soldier::getColor() const
+{
+	return this->_color;
+}
+
 void Soldier::setCords(const char x, const char y)
 {
 	this->_x = x;

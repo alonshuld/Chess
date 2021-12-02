@@ -22,6 +22,8 @@ public:
 	virtual void checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const = 0;
 	virtual void isValidMove(const string cords, const string* board, const bool currentColor) = 0; // uses frontedText to get x and y
 	int turnCordToInt(const char cord) const; // use this function to convert x or y to index so isValidMove() can use it on the char** from board
+	bool operator==(const Soldier& other);
+	bool getColor() const;
 	
 protected:
 	void setCords(const char x, const char y); // if cords are valid this function will update them

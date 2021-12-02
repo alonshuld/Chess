@@ -21,6 +21,7 @@ public:
 	void printBoard() const;
 	vector <Soldier*> getBoard() const;
 	Soldier* getSoldierInIndex(char x, char y) const;
+	void killSoldier(const string cords);
 	
 private:
 	vector <Soldier*> _board;

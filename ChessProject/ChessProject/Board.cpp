@@ -51,6 +51,16 @@ Soldier* Board::getSoldierInIndex(char x, char y) const
 			return this->_board[counter];
 }
 
+void Board::killSoldier(const string cords)
+{
+	if (this->getSoldierInIndex(cords[0], cords[1]) == this->getSoldierInIndex(cords[2], cords[3]) &&
+		getSoldierInIndex(cords[0], cords[1])->getColor() != this->getSoldierInIndex(cords[2], cords[3])->getColor())
+	{
+		this->_board.erase(std::remove(this->_board.begin(), this->_board.end(), this->getSoldierInIndex(cords[2], cords[3])), this->_board.end());
+		delete this->getSoldierInIndex(cords[2], cords[3]);
+	}
+}
+
 void Board::getFirstMsg(char* msg) const
 {
 	int msgCounter = 0;

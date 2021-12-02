@@ -61,6 +61,8 @@ void main()
 			{
 				board.updateCharBoard();
 				board.setColor();
+				board.killSoldier(msgFromGraphics);
+				cout << board.getSoldierInIndex('g', '2')->getName();
 			}
 			answer[0] = e;
 		}
