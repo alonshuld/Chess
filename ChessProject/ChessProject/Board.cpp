@@ -3,9 +3,12 @@
 
 Board::Board(const bool startColor)
 {
-	this->charBoard = new string[8];
+	this->charBoard = new string[LENGTH];
 	this->_currentColor = startColor;
-	this->_board = { new Rook('a', '1', 'R', false), new Rook('h', '1', 'R', false), new Rook('h', '8', 'r', true), new Rook('a', '8', 'r', true) };
+	this->_board = { new Rook('a', '1', 'r', true), new Rook('b', '1', 'r', true),new Rook('c', '1', 'r', true),new Rook('d', '1', 'r', true),new Rook('e', '1', 'r', true),new Rook('f', '1', 'r', true),new Rook('g', '1', 'r', true), new Rook('h', '1', 'r', true),
+		new Rook('a', '2', 'r', true), new Rook('b', '2', 'r', true),new Rook('c', '2', 'r', true),new Rook('d', '2', 'r', true),new Rook('e', '2', 'r', true),new Rook('f', '2', 'r', true),new Rook('g', '2', 'r', true),new Rook('h', '2', 'r', true)
+	, new Rook('a', '7', 'R', false), new Rook('b', '7', 'R', false),new Rook('c', '7', 'R', false),new Rook('d', '7', 'R', false),new Rook('e', '7', 'R', false),new Rook('f', '7', 'R', false),new Rook('g', '7', 'R', false),new Rook('h', '7', 'R', false)
+	, new Rook('a', '8', 'R', false), new Rook('b', '8', 'R', false),new Rook('c', '8', 'R', false),new Rook('d', '8', 'R', false),new Rook('e', '8', 'R', false),new Rook('f', '8', 'R', false),new Rook('g', '8', 'R', false),new Rook('h', '8','R' , false)};
 	this->updateCharBoard();
 }
 
@@ -26,20 +29,13 @@ string* Board::getCharBoard() const
 
 void Board::updateCharBoard()
 {
-	for (int counter = 0; counter < 8; counter++)
+	for (int counter = ZERO; counter < LENGTH; counter++)
 	{
 		this->charBoard[counter] = "########";
 	}
-	for (int counter = 0; counter < this->_board.size(); counter++)
+	for (int counter = ZERO; counter < this->_board.size(); counter++)
 	{
-		std::cout << this->charBoard[counter][counter] << std::endl;
 		this->charBoard[this->_board[counter]->turnCordToInt(this->_board[counter]->getY())][this->_board[counter]->turnCordToInt(this->_board[counter]->getX())] = this->_board[counter]->getName();
-	}
-	for (int counter = 0; counter < 8; counter++)
-	{
-		for(int i = 0; i < 8; i++)
-			std::cout << this->charBoard[counter][i];
-		std::cout << "" << std::endl;
 	}
 }
 
@@ -48,22 +44,38 @@ void Board::setColor()
 	this->_currentColor = !this->_currentColor;
 }
 
-char* Board::getFirstMsg() const
+Soldier* Board::getSoldierInIndex(char x, char y) const
 {
-	char msg[67];
-	msg[66] = NULL;
-	for (int counter = 0; counter < 8; counter++)
+	for (int counter = 0; counter < this->_board.size(); counter++)
+		if (this->_board[counter]->getX() == x && this->_board[counter]->getY() == y)
+			return this->_board[counter];
+}
+
+void Board::getFirstMsg(char* msg) const
+{
+	int msgCounter = 0;
+	for (int counter = LENGTH - ONE; counter >= ZERO; counter--)
 	{
-		for (int secCounter = 0; secCounter < 8; secCounter++)
+		for (int secCounter = LENGTH - ONE; secCounter >= ZERO; secCounter--)
 		{
-			msg[counter + secCounter] = this->charBoard[counter][secCounter];
+			msg[msgCounter] = this->charBoard[counter][secCounter];
+			msgCounter++;
 		}
 	}
-	msg[65] = char(this->_currentColor);
-	return msg;
+	msg[64] = int(this->_currentColor) + ASCII_NUMBERS;
 }
 
 vector<Soldier*> Board::getBoard() const
 {
 	return this->_board;
+}
+
+void Board::printBoard() const
+{
+	for (int counter = ZERO; counter < LENGTH; counter++)
+	{
+		for (int secCounter = ZERO; secCounter < LENGTH; secCounter++)
+			std::cout << this->charBoard[counter][secCounter];
+		std::cout << "" << std::endl;
+	}
 }

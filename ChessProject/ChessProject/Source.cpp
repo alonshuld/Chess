@@ -18,13 +18,11 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-	Board board(true);
+	Board board(false);
 	char answer[2];
-	answer[1] = NULL;
-
+	char msgToGraphics[1024] = "################################################################";
 	Pipe p;
 	bool isConnect = p.connect();
-	
 	string ans;
 	while (!isConnect)
 	{
@@ -44,13 +42,10 @@ void main()
 			return;
 		}
 	}
-	
-	
-	char msgToGraphics[1024];
+	answer[1] = NULL;
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
-	strcpy_s(msgToGraphics, board.getFirstMsg()); // just example...
-	
+	board.getFirstMsg(msgToGraphics);
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 	string msgFromGraphics = p.getMessageFromGraphics();
 	
@@ -58,12 +53,15 @@ void main()
 	{
 		try 
 		{
-			board.getBoard()[3]->isValidMove(msgFromGraphics, board.getCharBoard(), board.getColor());
+			board.getSoldierInIndex(FrontedText::getXorY(msgFromGraphics, 0), FrontedText::getXorY(msgFromGraphics, 1))->isValidMove(msgFromGraphics, board.getCharBoard(), board.getColor());
 		}
-		catch(const char e)
+		catch (const char e)
 		{
-			if(e == VALID)
+			if (e == VALID)
+			{
 				board.updateCharBoard();
+				board.setColor();
+			}
 			answer[0] = e;
 		}
 		strcpy_s(msgToGraphics, answer); // msgToGraphics should contain the result of the operation
