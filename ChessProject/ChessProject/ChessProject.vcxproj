@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="FrontedText.h" />
     <ClInclude Include="moveExceptions.h" />
     <ClInclude Include="Pipe.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="FrontedText.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Soldier.cpp" />

@@ -8,13 +8,14 @@ Rook::~Rook()
 {
 }
 
-void Rook::isValidMove(const string cords, const string* board)
+void Rook::isValidMove(const string cords, const string* board, const bool currentColor)
 {
 	char newX = FrontedText::getXorY(cords, 2);
 	char newY = FrontedText::getXorY(cords, 3);
 	char currentX = this->getX();
 	char currentY = this->getY();
 	checkIfCordsValid(newX, newY);
+	checkIfColorIsRight(newX, newY, board, currentColor);
 	checkIfNotSameIndex(newX, newY);
 	if ((currentX == newX && currentY != newY) || (currentX != newX && currentY == newY))
 	{
@@ -63,14 +64,4 @@ void Rook::checkIfNotRunOver(const int startX, const int startY, const char x, c
 					throw moveException::invalidMove();
 		}
 	}
-	//for (int counter = startY; counter < indexY; counter++)
-	//{
-	//	for (int secCounter = startX; secCounter < indexX; secCounter++)
-	//	{
-	//		if (board[counter][secCounter] != '#')
-	//		{
-	//			throw moveException::invalidMove();
-	//		}
-	//	}
-	//}
 }

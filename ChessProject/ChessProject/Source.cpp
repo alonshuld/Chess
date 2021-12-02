@@ -5,6 +5,7 @@ in order to read and write information from and to the Backend
 */
 
 #include "Rook.h"
+#include "Board.h"
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
@@ -17,8 +18,10 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-	Rook check('h', '7', 'r', false);
-	
+	Board board(true);
+	char answer[2];
+	answer[1] = NULL;
+
 	Pipe p;
 	bool isConnect = p.connect();
 	
@@ -46,46 +49,32 @@ void main()
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
-	
-	strcpy_s(msgToGraphics, "R######RR######R###############################r########rNbkqbNr1"); // just example...
+	strcpy_s(msgToGraphics, board.getFirstMsg()); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
-
-	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
 	
 	while (msgFromGraphics != "quit")
 	{
-		string colour[8] = { "rNbkqbNr", "########", "#######r", "########", "########", "########", "R######R", "R######R" };
-		// should handle the string the sent from graphics
-		// according the protocol. Ex: e2e4           (move e2 to e4)
-		
-		// YOUR CODE
-		char answer[2];
 		try 
 		{
-			check.isValidMove(msgFromGraphics, colour);
+			board.getBoard()[3]->isValidMove(msgFromGraphics, board.getCharBoard(), board.getColor());
 		}
 		catch(const char e)
 		{
+			if(e == VALID)
+				board.updateCharBoard();
 			answer[0] = e;
-			answer[1] = NULL;
 		}
 		strcpy_s(msgToGraphics, answer); // msgToGraphics should contain the result of the operation
 		
 		/******* JUST FOR EREZ DEBUGGING ******/
 		//int r = rand() % 10; // just for debugging......
 		//msgToGraphics[0] = (char)(1 + '0');
-		//msgToGraphics[1] = 0;
-		/******* JUST FOR EREZ DEBUGGING ******/
-		
-		
-		// return result to graphics		
+		//msgToGraphics[1] = 0
+		/******* JUST FOR EREZ DEBUGGING ******/	
 		p.sendMessageToGraphics(msgToGraphics);   
-		
-		// get message from graphics
 		msgFromGraphics = p.getMessageFromGraphics();
 	}
-
 	p.close();
 }
