@@ -15,7 +15,7 @@ void Rook::isValidMove(const string cords, const string* board, const bool curre
 	char currentX = this->getX();
 	char currentY = this->getY();
 	checkIfCordsValid(newX, newY);
-	checkIfColorIsRight(newX, newY, board, currentColor);
+	checkIfSourceIsRight(board, currentColor);
 	checkIfNotSameIndex(newX, newY);
 	if ((currentX == newX && currentY != newY) || (currentX != newX && currentY == newY))
 	{
@@ -26,7 +26,6 @@ void Rook::isValidMove(const string cords, const string* board, const bool curre
 	{
 		throw moveException::invalidMove();
 	}
-	setCords(newX, newY);
 	throw moveException::validMove();
 }
 

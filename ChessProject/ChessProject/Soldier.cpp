@@ -21,7 +21,7 @@ char Soldier::getY() const
 	return this->_y;
 }
 
-void Soldier::checkIfColorIsRight(const char x, const char y, const string* board, const bool color)
+void Soldier::checkIfSourceIsRight(const string* board, const bool color)
 {
 	if (this->_color != color)
 		throw moveException::checkSourceSoldier();
@@ -48,6 +48,18 @@ void Soldier::checkIfCordsValid(const char x, const char y) const
 char Soldier::getName() const
 {
 	return this->_name;
+}
+
+bool Soldier::operator==(const Soldier& other)
+{
+	if (this->_x == other._x && this->_y == other._y)
+		return true;
+	return false;
+}
+
+bool Soldier::getColor() const
+{
+	return this->_color;
 }
 
 bool Soldier::colorOfSoldier(const char x, const char y, const string* board) const

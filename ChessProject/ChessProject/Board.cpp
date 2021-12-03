@@ -14,6 +14,14 @@ Board::Board(const bool startColor)
 
 Board::~Board()
 {
+	if (this->_board.size() > ZERO)
+	{
+		for (int counter = ZERO; counter < this->_board.size(); counter++)
+		{
+			delete this->_board[counter];
+		}
+		this->_board.clear();
+	}
 	delete[]this->charBoard;
 }
 
@@ -27,6 +35,22 @@ string* Board::getCharBoard() const
 	return this->charBoard;
 }
 
+void Board::killSoldier(const string cords)
+{
+	Soldier* sourceSoldier = this->getSoldierInIndex(cords[ZERO], cords[ONE]);
+	if (this->charBoard[cords[THREE] - ASCII_NUMBERS - ONE][cords[TWO] - ASCII_LETTERS] != '#')
+	{
+		Soldier* delSoldier = this->getSoldierInIndex(cords[TWO], cords[THREE]); // getSoldier check if a soldier is # and throw exception if it does, only the source cannot be '#' so we declarer it inside the if
+		if (sourceSoldier->getColor() != delSoldier->getColor())
+		{
+			this->_board.erase(std::remove(this->_board.begin(), this->_board.end(), delSoldier), this->_board.end());
+			delete delSoldier;
+		}
+	}
+	sourceSoldier->setCords(cords[TWO], cords[THREE]);
+}
+
+
 void Board::updateCharBoard()
 {
 	for (int counter = ZERO; counter < LENGTH; counter++)
@@ -37,6 +61,7 @@ void Board::updateCharBoard()
 	{
 		this->charBoard[this->_board[counter]->turnCordToInt(this->_board[counter]->getY())][this->_board[counter]->turnCordToInt(this->_board[counter]->getX())] = this->_board[counter]->getName();
 	}
+	printBoard();
 }
 
 void Board::setColor()
@@ -46,9 +71,11 @@ void Board::setColor()
 
 Soldier* Board::getSoldierInIndex(char x, char y) const
 {
-	for (int counter = 0; counter < this->_board.size(); counter++)
+	for (int counter = ZERO; counter < this->_board.size(); counter++)
 		if (this->_board[counter]->getX() == x && this->_board[counter]->getY() == y)
 			return this->_board[counter];
+	if (this->charBoard[y - ASCII_NUMBERS - ONE][x - ASCII_LETTERS] == '#')
+		throw moveException::checkSourceSoldier();
 }
 
 void Board::getFirstMsg(char* msg) const
@@ -62,7 +89,7 @@ void Board::getFirstMsg(char* msg) const
 			msgCounter++;
 		}
 	}
-	msg[64] = int(this->_currentColor) + ASCII_NUMBERS;
+	msg[LENGTH*LENGTH] = int(this->_currentColor) + ASCII_NUMBERS;
 }
 
 vector<Soldier*> Board::getBoard() const

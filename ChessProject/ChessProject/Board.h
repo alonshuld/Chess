@@ -2,9 +2,6 @@
 #include "Soldier.h"
 #include "Rook.h"
 #include <vector>
-#define LENGTH 8
-#define ONE 1
-#define ZERO 0
 
 using std::vector;
 
@@ -18,10 +15,13 @@ public:
 	void updateCharBoard();
 	void setColor();
 	void getFirstMsg(char* msg) const;
-	void printBoard() const;
 	vector <Soldier*> getBoard() const;
 	Soldier* getSoldierInIndex(char x, char y) const;
-	
+	void killSoldier(const string cords);
+
+protected:
+	void printBoard() const;
+
 private:
 	vector <Soldier*> _board;
 	string* charBoard;

@@ -18,7 +18,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
-	Board board(false);
+	Board board(true);
 	char answer[2];
 	char msgToGraphics[1024] = "################################################################";
 	Pipe p;
@@ -59,6 +59,7 @@ void main()
 		{
 			if (e == VALID)
 			{
+				board.killSoldier(msgFromGraphics);
 				board.updateCharBoard();
 				board.setColor();
 			}
