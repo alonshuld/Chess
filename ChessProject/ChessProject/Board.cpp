@@ -2,6 +2,11 @@
 #include <iostream>
 
 Board::Board(const bool startColor)
+/*
+* Ctor for a board
+* Input: the color that will start the game
+* Output: none
+*/
 {
 	this->charBoard = new string[LENGTH];
 	this->_currentColor = startColor;
@@ -13,21 +18,37 @@ Board::Board(const bool startColor)
 }
 
 Board::~Board()
+/*
+* Ctor for board, deletes the board
+*/
 {
-	delete[]this->charBoard;
+	delete[] this->charBoard;
 }
 
 bool Board::getColor() const
+/*
+* get the color of the player that it is his turn
+* Input: none
+* Output: currentColor
+*/
 {
 	return this->_currentColor;
 }
 
 string* Board::getCharBoard() const
+/*
+* get the board
+* Input: none
+* Output: charBoard
+*/
 {
 	return this->charBoard;
 }
 
 void Board::updateCharBoard()
+/*
+* update the char board
+*/
 {
 	for (int counter = ZERO; counter < LENGTH; counter++)
 	{
@@ -40,11 +61,21 @@ void Board::updateCharBoard()
 }
 
 void Board::setColor()
+/*
+* sets the color of the next player
+* Input: none
+* Output: none
+*/
 {
 	this->_currentColor = !this->_currentColor;
 }
 
 Soldier* Board::getSoldierInIndex(char x, char y) const
+/*
+* get soldier by an index
+* Input: x and y
+* Output: Pointer to soldier
+*/
 {
 	for (int counter = 0; counter < this->_board.size(); counter++)
 		if (this->_board[counter]->getX() == x && this->_board[counter]->getY() == y)
@@ -52,6 +83,11 @@ Soldier* Board::getSoldierInIndex(char x, char y) const
 }
 
 void Board::killSoldier(const string cords)
+/*
+* kill a soldier in the cord
+* Input: cords of the soldier to kill
+* Output: none
+*/
 {
 	if (this->getSoldierInIndex(cords[0], cords[1]) == this->getSoldierInIndex(cords[2], cords[3]) &&
 		getSoldierInIndex(cords[0], cords[1])->getColor() != this->getSoldierInIndex(cords[2], cords[3])->getColor())
@@ -62,6 +98,11 @@ void Board::killSoldier(const string cords)
 }
 
 void Board::getFirstMsg(char* msg) const
+/*
+* get the first message to the screen
+* Input: pointer to char that will store the msg
+* Output: none
+*/
 {
 	int msgCounter = 0;
 	for (int counter = LENGTH - ONE; counter >= ZERO; counter--)
@@ -76,11 +117,21 @@ void Board::getFirstMsg(char* msg) const
 }
 
 vector<Soldier*> Board::getBoard() const
+/*
+* Get the board
+* Input: none
+* Output: vector of soldier pointer
+*/
 {
 	return this->_board;
 }
 
 void Board::printBoard() const
+/*
+* Print the board
+* Input: none
+* Output: none
+*/
 {
 	for (int counter = ZERO; counter < LENGTH; counter++)
 	{
