@@ -5,10 +5,10 @@ Board::Board(const bool startColor)
 {
 	this->charBoard = new string[LENGTH];
 	this->_currentColor = startColor;
-	this->_board = { new Rook('a', '1', 'r', true), new Rook('b', '1', 'r', true),new Rook('c', '1', 'r', true),new Rook('d', '1', 'r', true),new Rook('e', '1', 'r', true),new Rook('f', '1', 'r', true),new Rook('g', '1', 'r', true), new Rook('h', '1', 'r', true),
+	this->_board = { new Rook('a', '1', 'r', true), new Rook('b', '1', 'r', true),new Rook('c', '1', 'r', true),new Rook('d', '1', 'r', true),new King('e', '1', 'k', true),new Rook('f', '1', 'r', true),new Rook('g', '1', 'r', true), new Rook('h', '1', 'r', true),
 		new Rook('a', '2', 'r', true), new Rook('b', '2', 'r', true),new Rook('c', '2', 'r', true),new Rook('d', '2', 'r', true),new Rook('e', '2', 'r', true),new Rook('f', '2', 'r', true),new Rook('g', '2', 'r', true),new Rook('h', '2', 'r', true)
 	, new Rook('a', '7', 'R', false), new Rook('b', '7', 'R', false),new Rook('c', '7', 'R', false),new Rook('d', '7', 'R', false),new Rook('e', '7', 'R', false),new Rook('f', '7', 'R', false),new Rook('g', '7', 'R', false),new Rook('h', '7', 'R', false)
-	, new Rook('a', '8', 'R', false), new Rook('b', '8', 'R', false),new Rook('c', '8', 'R', false),new Rook('d', '8', 'R', false),new Rook('e', '8', 'R', false),new Rook('f', '8', 'R', false),new Rook('g', '8', 'R', false),new Rook('h', '8','R' , false)};
+	, new Rook('a', '8', 'R', false), new Rook('b', '8', 'R', false),new Rook('c', '8', 'R', false),new Rook('d', '8', 'R', false),new King('e', '8', 'K', false),new Rook('f', '8', 'R', false),new Rook('g', '8', 'R', false),new Rook('h', '8','R' , false)};
 	this->updateCharBoard();
 }
 

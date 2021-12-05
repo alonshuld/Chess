@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="FrontedText.h" />
+    <ClInclude Include="King.h" />
     <ClInclude Include="moveExceptions.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="Rook.h" />
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="FrontedText.cpp" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Source.cpp" />

@@ -1,5 +1,5 @@
 #pragma once
-#include "Soldier.h"
+#include "King.h"
 #include "Rook.h"
 #include <vector>
 
