@@ -5,10 +5,10 @@ Board::Board(const bool startColor)
 {
 	this->charBoard = new string[LENGTH];
 	this->_currentColor = startColor;
-	this->_board = { new Rook('a', '1', 'r', true), new Rook('b', '1', 'r', true),new Rook('c', '1', 'r', true),new Rook('d', '1', 'r', true),new King('e', '1', 'k', true),new Rook('f', '1', 'r', true),new Rook('g', '1', 'r', true), new Rook('h', '1', 'r', true),
+	this->_board = { new Rook('a', '1', 'r', true), new Rook('b', '1', 'r', true),new Rook('c', '1', 'r', true),new King('d', '1', 'k', true),new Rook('e', '1', 'r', true),new Rook('f', '1', 'r', true),new Rook('g', '1', 'r', true), new Rook('h', '1', 'r', true),
 		new Rook('a', '2', 'r', true), new Rook('b', '2', 'r', true),new Rook('c', '2', 'r', true),new Rook('d', '2', 'r', true),new Rook('e', '2', 'r', true),new Rook('f', '2', 'r', true),new Rook('g', '2', 'r', true),new Rook('h', '2', 'r', true)
 	, new Rook('a', '7', 'R', false), new Rook('b', '7', 'R', false),new Rook('c', '7', 'R', false),new Rook('d', '7', 'R', false),new Rook('e', '7', 'R', false),new Rook('f', '7', 'R', false),new Rook('g', '7', 'R', false),new Rook('h', '7', 'R', false)
-	, new Rook('a', '8', 'R', false), new Rook('b', '8', 'R', false),new Rook('c', '8', 'R', false),new Rook('d', '8', 'R', false),new King('e', '8', 'K', false),new Rook('f', '8', 'R', false),new Rook('g', '8', 'R', false),new Rook('h', '8','R' , false)};
+	, new Rook('a', '8', 'R', false), new Rook('b', '8', 'R', false),new Rook('c', '8', 'R', false),new King('d', '8', 'K', false), new Rook('e', '8', 'R', false),new Rook('f', '8', 'R', false),new Rook('g', '8', 'R', false),new Rook('h', '8','R' , false)};
 	this->updateCharBoard();
 }
 
@@ -81,7 +81,7 @@ Soldier* Board::getSoldierInIndex(char x, char y) const
 void Board::getFirstMsg(char* msg) const
 {
 	int msgCounter = 0;
-	for (int counter = LENGTH - ONE; counter >= ZERO; counter--)
+	for (int counter = ZERO; counter >= ZERO; counter--)
 	{
 		for (int secCounter = LENGTH - ONE; secCounter >= ZERO; secCounter--)
 		{
@@ -99,9 +99,9 @@ vector<Soldier*> Board::getBoard() const
 
 void Board::printBoard() const
 {
-	for (int counter = ZERO; counter < LENGTH; counter++)
+	for (int counter = LENGTH - ONE; counter >= ZERO; counter--)
 	{
-		for (int secCounter = ZERO; secCounter < LENGTH; secCounter++)
+		for (int secCounter = LENGTH - ONE; secCounter >= ZERO; secCounter--)
 			std::cout << this->charBoard[counter][secCounter];
 		std::cout << "" << std::endl;
 	}

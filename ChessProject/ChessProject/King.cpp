@@ -32,5 +32,5 @@ void King::isValidMove(const string cords, const string* board, const bool curre
 
 void King::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
-	checkIfDestNotOwn(turnCordToInt(x), turnCordToInt(y), board);
+	checkIfDestNotOwn(x, y, board);
 }

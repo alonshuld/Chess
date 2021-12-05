@@ -4,7 +4,6 @@ It is recommended to use the following code in your project,
 in order to read and write information from and to the Backend
 */
 
-#include "Rook.h"
 #include "Board.h"
 #include "Pipe.h"
 #include <iostream>
@@ -20,7 +19,7 @@ void main()
 	srand(time_t(NULL));
 	Board board(true);
 	char answer[2];
-	char msgToGraphics[1024] = "################################################################";
+	char msgToGraphics[1024] = "RRRKRRRRRRRRRRRR################################rrrrrrrrrrrkrrrr1";
 	Pipe p;
 	bool isConnect = p.connect();
 	string ans;
@@ -45,7 +44,8 @@ void main()
 	answer[1] = NULL;
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
-	board.getFirstMsg(msgToGraphics);
+	
+	//board.getFirstMsg(msgToGraphics);
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 	string msgFromGraphics = p.getMessageFromGraphics();
 	
