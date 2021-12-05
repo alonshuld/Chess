@@ -1,14 +1,29 @@
 #include "Rook.h"
 
 Rook::Rook(const char x, const char y, const char name, const bool color) : Soldier(x, y, name, color)
+/*
+* Ctor for rook
+* Input: x, y, name for the rook, color of the rook
+* Output: none
+*/
 {
 }
 
 Rook::~Rook()
+/*
+* Dtor for rook
+* Input: none
+* Output: none
+*/
 {
 }
 
 void Rook::isValidMove(const string cords, const string* board, const bool currentColor)
+/*
+* Checks if the rook did a valid move
+* Input: cords of the move, the board, and the current player that can move
+* Output: none
+*/
 {
 	char newX = FrontedText::getXorY(cords, 2);
 	char newY = FrontedText::getXorY(cords, 3);
@@ -30,6 +45,11 @@ void Rook::isValidMove(const string cords, const string* board, const bool curre
 }
 
 void Rook::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
+/*
+* Check if we dont run over another soldier
+* Input: the start x, y the current x, y and the board
+* Output: none
+*/
 {
 	int indexX = turnCordToInt(x);
 	int indexY = turnCordToInt(y);

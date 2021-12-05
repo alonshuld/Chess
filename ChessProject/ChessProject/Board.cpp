@@ -61,7 +61,6 @@ void Board::updateCharBoard()
 	{
 		this->charBoard[this->_board[counter]->turnCordToInt(this->_board[counter]->getY())][this->_board[counter]->turnCordToInt(this->_board[counter]->getX())] = this->_board[counter]->getName();
 	}
-	printBoard();
 }
 
 void Board::setColor()
@@ -95,14 +94,4 @@ void Board::getFirstMsg(char* msg) const
 vector<Soldier*> Board::getBoard() const
 {
 	return this->_board;
-}
-
-void Board::printBoard() const
-{
-	for (int counter = LENGTH - ONE; counter >= ZERO; counter--)
-	{
-		for (int secCounter = LENGTH - ONE; secCounter >= ZERO; secCounter--)
-			std::cout << this->charBoard[counter][secCounter];
-		std::cout << "" << std::endl;
-	}
 }

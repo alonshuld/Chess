@@ -19,9 +19,6 @@ public:
 	Soldier* getSoldierInIndex(char x, char y) const;
 	void killSoldier(const string cords);
 
-protected:
-	void printBoard() const;
-
 private:
 	vector <Soldier*> _board;
 	string* charBoard;

@@ -81,6 +81,7 @@ int Soldier::turnCordToInt(const char cord) const
 	return ((int)cord) - ASCII_NUMBERS - ONE; // -1 because we return index and the y cords of the board starts at 1
 }
 
+
 void Soldier::setCords(const char x, const char y)
 {
 	this->_x = x;
