@@ -77,17 +77,12 @@ Soldier* Board::getSoldierInIndex(char x, char y) const
 		throw moveException::checkSourceSoldier();
 }
 
-void Board::getFirstMsg(char* msg) const
+void Board::getStartColor(char* msg)
 {
-	int msgCounter = 0;
-	for (int counter = ZERO; counter >= ZERO; counter--)
-	{
-		for (int secCounter = LENGTH - ONE; secCounter >= ZERO; secCounter--)
-		{
-			msg[msgCounter] = this->charBoard[counter][secCounter];
-			msgCounter++;
-		}
-	}
+	int color = 0;
+	std::cout << "Which color would you like to start? white - 0, black - any number" << std::endl;
+	std::cin >> color;
+	this->_currentColor = bool(color);
 	msg[LENGTH*LENGTH] = int(this->_currentColor) + ASCII_NUMBERS;
 }
 

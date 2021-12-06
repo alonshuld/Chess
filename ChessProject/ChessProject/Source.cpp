@@ -19,7 +19,7 @@ void main()
 	srand(time_t(NULL));
 	Board board(true);
 	char answer[2];
-	char msgToGraphics[1024] = "RRRKRRRRRRRRRRRR################################rrrrrrrrrrrkrrrr1";
+	char msgToGraphics[1024] = "RRRKRRRRRRRRRRRR################################rrrrrrrrrrrkrrrr";
 	Pipe p;
 	bool isConnect = p.connect();
 	string ans;
@@ -42,11 +42,8 @@ void main()
 		}
 	}
 	answer[1] = NULL;
-	// msgToGraphics should contain the board string accord the protocol
-	// YOUR CODE
-	
-	//board.getFirstMsg(msgToGraphics);
-	p.sendMessageToGraphics(msgToGraphics);   // send the board string
+	board.getStartColor(msgToGraphics);
+	p.sendMessageToGraphics(msgToGraphics);   
 	string msgFromGraphics = p.getMessageFromGraphics();
 	
 	while (msgFromGraphics != "quit")
@@ -65,12 +62,12 @@ void main()
 			}
 			answer[0] = e;
 		}
-		strcpy_s(msgToGraphics, answer); // msgToGraphics should contain the result of the operation
+		strcpy_s(msgToGraphics, answer); 
 		
 		/******* JUST FOR EREZ DEBUGGING ******/
 		//int r = rand() % 10; // just for debugging......
 		//msgToGraphics[0] = (char)(1 + '0');
-		//msgToGraphics[1] = 0
+		//msgToGraphics[1] = 0;
 		/******* JUST FOR EREZ DEBUGGING ******/	
 		p.sendMessageToGraphics(msgToGraphics);   
 		msgFromGraphics = p.getMessageFromGraphics();

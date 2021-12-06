@@ -14,7 +14,7 @@ public:
 	string* getCharBoard() const;
 	void updateCharBoard();
 	void setColor();
-	void getFirstMsg(char* msg) const;
+	void getStartColor(char* msg);
 	vector <Soldier*> getBoard() const;
 	Soldier* getSoldierInIndex(char x, char y) const;
 	void killSoldier(const string cords);
