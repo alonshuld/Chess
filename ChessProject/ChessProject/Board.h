@@ -18,6 +18,7 @@ public:
 	vector <Soldier*> getBoard() const;
 	Soldier* getSoldierInIndex(char x, char y) const;
 	void killSoldier(const string cords);
+	void isInChess();
 
 private:
 	vector <Soldier*> _board;

@@ -50,6 +50,66 @@ void Board::killSoldier(const string cords)
 	sourceSoldier->setCords(cords[TWO], cords[THREE]);
 }
 
+void Board::isInChess()
+{
+	char currentKingX = ' ';
+	char currentKingY = ' ';
+	char otherKingX = ' ';
+	char otherKingY = ' ';
+	string cords = "";
+	for (int i = 0; i < this->_board.size(); i++)
+	{
+		if (this->_board[i]->getName() == 'K' || this->_board[i]->getName() == 'k')
+			if (this->_board[i]->getColor() == this->_currentColor)
+			{
+				Soldier* currentKing = this->_board[i];
+				currentKingX = currentKing->getX();
+				currentKingY = currentKing->getY();
+			}
+			else
+			{
+				Soldier* otherKing = this->_board[i];
+				otherKingX = otherKing->getX();
+				otherKingY = otherKing->getY();
+			}
+	}
+	for (int i = 0; i < this->_board.size(); i++)
+	{
+		cords = "";
+		cords += this->_board[i]->getX();
+		cords += this->_board[i]->getY();
+		if (this->_currentColor != this->_board[i]->getColor())
+		{
+			cords += currentKingX;
+			cords += currentKingY;
+			try
+			{
+				this->_board[i]->isValidMove(cords, this->charBoard, !this->_currentColor);
+			}
+			catch (const char e)
+			{
+				if (e == '0')
+					throw moveException::checkOwnCheck();
+			}
+		}
+		else
+		{
+			cords += otherKingX;
+			cords += otherKingY;
+			try
+			{
+				this->_board[i]->isValidMove(cords, this->charBoard, this->_currentColor);
+			}
+			catch (const char e)
+			{
+				if (e == '0')
+					throw moveException::check();
+			}
+		}
+	}
+	this->setColor();
+}
+
 
 void Board::updateCharBoard()
 {

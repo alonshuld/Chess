@@ -58,10 +58,23 @@ void main()
 			{
 				board.killSoldier(msgFromGraphics);
 				board.updateCharBoard();
-				board.setColor();
 			}
 			answer[0] = e;
+
 		}
+		if (answer[0] == '0')
+		{
+			try
+			{
+				board.isInChess();
+			}
+			catch (const char e)
+			{
+				board.setColor();
+				answer[0] = e;
+			}
+		}
+		
 		strcpy_s(msgToGraphics, answer); 
 		
 		/******* JUST FOR EREZ DEBUGGING ******/
