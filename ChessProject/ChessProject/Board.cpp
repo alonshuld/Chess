@@ -107,7 +107,6 @@ void Board::isInChess()
 			}
 		}
 	}
-	this->setColor();
 }
 
 

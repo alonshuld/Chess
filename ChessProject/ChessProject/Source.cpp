@@ -52,7 +52,7 @@ void main()
 		{
 			board.getSoldierInIndex(FrontedText::getXorY(msgFromGraphics, 0), FrontedText::getXorY(msgFromGraphics, 1))->isValidMove(msgFromGraphics, board.getCharBoard(), board.getColor());
 		}
-		catch (const char e)
+		catch (const char e) // add temp board that checks if is in own check and if it is it wont kill the soldier and if it isnt it will kill the soldier on the main board
 		{
 			if (e == VALID)
 			{
@@ -60,9 +60,8 @@ void main()
 				board.updateCharBoard();
 			}
 			answer[0] = e;
-
 		}
-		if (answer[0] == '0')
+		if (answer[0] == VALID)
 		{
 			try
 			{
@@ -70,11 +69,11 @@ void main()
 			}
 			catch (const char e)
 			{
-				board.setColor();
 				answer[0] = e;
 			}
+			if(answer[0] != WILL_BE_OWN_CHECK)
+				board.setColor();
 		}
-		
 		strcpy_s(msgToGraphics, answer); 
 		
 		/******* JUST FOR EREZ DEBUGGING ******/
