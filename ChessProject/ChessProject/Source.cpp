@@ -54,6 +54,12 @@ void main()
 		}
 		catch (const char e) // add temp board that checks if is in own check and if it is it wont kill the soldier and if it isnt it will kill the soldier on the main board
 		{
+			/*
+			Message from Daniel: you're probably right :) 
+			I'm not sure there is a simpler way to do this, I'll keep thinking about it tho.
+			You should do everything on the temp board, than if there is an own check dont update the main board and copy main to temp, if there isnt than you can update it. 
+			Basically what you wrote yourself :)
+			*/
 			if (e == VALID)
 			{
 				board.killSoldier(msgFromGraphics);
@@ -65,7 +71,7 @@ void main()
 		{
 			try
 			{
-				board.isInChess();
+				board.isInChess(); 
 			}
 			catch (const char e)
 			{
