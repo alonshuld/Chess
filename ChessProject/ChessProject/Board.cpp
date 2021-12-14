@@ -50,30 +50,34 @@ void Board::killSoldier(const string cords)
 	sourceSoldier->setCords(cords[TWO], cords[THREE]);
 }
 
-void Board::isInChess()
+
+void Board::getKings(Soldier* currentKing, Soldier* otherKing) const
 {
-	char currentKingX = ' ';
-	char currentKingY = ' ';
-	char otherKingX = ' ';
-	char otherKingY = ' ';
-	string cords = "";
-	for (int i = 0; i < this->_board.size(); i++)
+	for (int i = ZERO; i < this->_board.size(); i++)
 	{
 		if (this->_board[i]->getName() == 'K' || this->_board[i]->getName() == 'k')
 			if (this->_board[i]->getColor() == this->_currentColor)
 			{
-				Soldier* currentKing = this->_board[i];
-				currentKingX = currentKing->getX();
-				currentKingY = currentKing->getY();
+				currentKing->operator=(*this->_board[i]);
 			}
 			else
 			{
-				Soldier* otherKing = this->_board[i];
-				otherKingX = otherKing->getX();
-				otherKingY = otherKing->getY();
+				otherKing->operator=(*this->_board[i]);
 			}
 	}
-	for (int i = 0; i < this->_board.size(); i++)
+}
+
+void Board::isInChess()
+{
+	string cords = "";
+	King currentKing('a', '1', 'k', false);
+	King otherKing('a', '1', 'k', false);
+	getKings(&currentKing, &otherKing);
+	char currentKingX = currentKing.getX();
+	char currentKingY = currentKing.getY();
+	char otherKingX = otherKing.getX();
+	char otherKingY = otherKing.getY();
+	for (int i = ZERO; i < this->_board.size(); i++)
 	{
 		cords = "";
 		cords += this->_board[i]->getX();
@@ -109,17 +113,18 @@ void Board::isInChess()
 	}
 }
 
-Board* Board::operator=(const Board& other)
+Board& Board::operator=(const Board& other)
 {
 	this->_currentColor = other._currentColor;
-	for (int i = 0; i < other.charBoard->length(); i++)
+	for (int i = ZERO; i < other.charBoard->length(); i++)
 	{
 		this->charBoard[i] = other.charBoard[i];
 	}
-	for (int i = 0; i < other._board.size(); i++)
+	for (int i = ZERO; i < other._board.size(); i++)
 	{
-		this->_board[i] = other._board[i];
+		this->_board[i]->operator=(*other._board[i]);
 	}
+	return *this;
 }
 
 
@@ -162,4 +167,3 @@ vector<Soldier*> Board::getBoard() const
 {
 	return this->_board;
 }
-

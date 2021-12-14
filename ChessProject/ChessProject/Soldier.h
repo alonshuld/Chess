@@ -18,6 +18,7 @@ public:
 	char getX() const; 
 	char getY() const;	
 	bool operator==(const Soldier& other);
+	Soldier& operator=(const Soldier& other);
 	bool getColor() const;
 	char getName() const;
 	bool colorOfSoldier(const char x, const char y, const string* board) const; // get the color of a soldier using x and y

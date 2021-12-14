@@ -19,7 +19,9 @@ public:
 	Soldier* getSoldierInIndex(char x, char y) const;
 	void killSoldier(const string cords);
 	void isInChess();
-	Board* operator=(const Board& other);
+	Board& operator=(const Board& other);
+	void getKings(Soldier* currentKing, Soldier* otherKing) const;
+
 private:
 	vector <Soldier*> _board;
 	string* charBoard;

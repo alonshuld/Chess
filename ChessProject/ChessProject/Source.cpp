@@ -17,6 +17,7 @@ using std::string;
 void main()
 {
 	srand(time_t(NULL));
+	Board tempBoard(true);
 	Board board(true);
 	char answer[2];
 	char msgToGraphics[1024] = "RRRKRRRRRRRRRRRR################################rrrrrrrrrrrkrrrr";
@@ -52,18 +53,13 @@ void main()
 		{
 			board.getSoldierInIndex(FrontedText::getXorY(msgFromGraphics, 0), FrontedText::getXorY(msgFromGraphics, 1))->isValidMove(msgFromGraphics, board.getCharBoard(), board.getColor());
 		}
-		catch (const char e) // add temp board that checks if is in own check and if it is it wont kill the soldier and if it isnt it will kill the soldier on the main board
+		catch (const char e)
 		{
-			/*
-			Message from Daniel: you're probably right :) 
-			I'm not sure there is a simpler way to do this, I'll keep thinking about it tho.
-			You should do everything on the temp board, than if there is an own check dont update the main board and copy main to temp, if there isnt than you can update it. 
-			Basically what you wrote yourself :)
-			*/
 			if (e == VALID)
 			{
-				board.killSoldier(msgFromGraphics);
-				board.updateCharBoard();
+				tempBoard = board;
+				tempBoard.killSoldier(msgFromGraphics);
+				tempBoard.updateCharBoard();
 			}
 			answer[0] = e;
 		}
@@ -71,14 +67,26 @@ void main()
 		{
 			try
 			{
-				board.isInChess(); 
+				tempBoard.isInChess();
 			}
 			catch (const char e)
 			{
 				answer[0] = e;
 			}
-			if(answer[0] != WILL_BE_OWN_CHECK)
+			if (answer[0] != WILL_BE_OWN_CHECK)
+			{
+				board.killSoldier(msgFromGraphics);
+				board.updateCharBoard();
+				try
+				{
+					board.isInChess();
+				}
+				catch (const char e)
+				{
+					answer[0] = e;
+				}
 				board.setColor();
+			}
 		}
 		strcpy_s(msgToGraphics, answer); 
 		

@@ -57,6 +57,18 @@ bool Soldier::operator==(const Soldier& other)
 	return false;
 }
 
+Soldier& Soldier::operator=(const Soldier& other)
+{
+	if (this != &other)
+	{
+		this->_color = other._color;
+		this->_x = other._x;
+		this->_y = other._y;
+		this->_name = other._name;
+	}
+	return *this;
+}
+
 bool Soldier::getColor() const
 {
 	return this->_color;
