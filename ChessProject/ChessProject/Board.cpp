@@ -109,6 +109,19 @@ void Board::isInChess()
 	}
 }
 
+Board* Board::operator=(const Board& other)
+{
+	this->_currentColor = other._currentColor;
+	for (int i = 0; i < other.charBoard->length(); i++)
+	{
+		this->charBoard[i] = other.charBoard[i];
+	}
+	for (int i = 0; i < other._board.size(); i++)
+	{
+		this->_board[i] = other._board[i];
+	}
+}
+
 
 void Board::updateCharBoard()
 {
@@ -149,3 +162,4 @@ vector<Soldier*> Board::getBoard() const
 {
 	return this->_board;
 }
+
