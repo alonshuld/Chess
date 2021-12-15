@@ -1,4 +1,5 @@
 #pragma once
+#include "Queen.h"
 #include "King.h"
 #include "Rook.h"
 #include <vector>

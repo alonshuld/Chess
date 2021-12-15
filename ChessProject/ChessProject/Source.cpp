@@ -20,7 +20,7 @@ void main()
 	Board tempBoard(true);
 	Board board(true);
 	char answer[2];
-	char msgToGraphics[1024] = "RRRKRRRRRRRRRRRR################################rrrrrrrrrrrkrrrr";
+	char msgToGraphics[1024] = "RRRKQRRRRRRRRRRR################################rrrrrrrrrrrkqrrr";
 	Pipe p;
 	bool isConnect = p.connect();
 	string ans;
