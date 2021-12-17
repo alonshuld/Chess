@@ -13,10 +13,16 @@ void Bishop::isValidMove(const string cords, const string* board, const bool cur
 	char newY = FrontedText::getXorY(cords, 3);
 	char currentX = this->getX();
 	char currentY = this->getY();
+	int testValid = 0;
+	int cx = turnCordToInt(currentX);
+	int nx = turnCordToInt(newX);
+	int cy = turnCordToInt(currentY);
+	int ny = turnCordToInt(newY);
 	checkIfCordsValid(newX, newY);
 	checkIfSourceIsRight(board, currentColor);
 	checkIfNotSameIndex(newX, newY);
-	if ((currentX != newX && currentY != newY))
+	testValid = cx - nx;
+	if ((currentX != newX && currentY != newY) && (((cy - ny) == testValid) || (cy - ny) == -testValid))
 	{
 		checkIfDestNotOwn(newX, newY, board);
 		checkIfNotRunOver(turnCordToInt(currentX), turnCordToInt(currentY), newX, newY, board);
@@ -30,57 +36,50 @@ void Bishop::isValidMove(const string cords, const string* board, const bool cur
 
 void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
+	//i = index in line
+	//j = lines
+	int j = startY;
 	int indexX = turnCordToInt(x);
 	int indexY = turnCordToInt(y);
-	int yCounter = startY - ONE;
-	if (startY > indexY)
+	if (startY < indexY) // goes up
 	{
-		if (startX > indexX)
+		if (startX < indexX) // goes up right
 		{
-			for (int counter = startX - ONE; counter > indexX; counter--)
+			for (int i = startX + 1; i < indexX; i++)
 			{
-				if (board[yCounter][counter] != '#')
-				{
+				j++;
+				if (board[j][i] != '#')
 					throw moveException::invalidMove();
-				}
-				yCounter--;
 			}
 		}
-		else
+		else //goes up left
 		{
-			for (int counter = startX + ONE; counter < indexX; counter++)
+			for (int i = startX - 1; i > indexX; i--)
 			{
-				if (board[yCounter][counter] != '#')
-				{
+				j++;
+				if (board[j][i] != '#')
 					throw moveException::invalidMove();
-				}
-				yCounter--;
 			}
 		}
 	}
-	if (startY < indexY)
+	else //goes down
 	{
-		yCounter += TWO;
-		if (startX > indexX)
+		if (startX < indexX) // goes down right
 		{
-			for (int counter = startX - ONE; counter > indexX; counter--)
+			for (int i = startX + 1; i < indexX; i++)
 			{
-				if (board[yCounter][counter] != '#')
-				{
+				j--;
+				if (board[j][i] != '#')
 					throw moveException::invalidMove();
-				}
-				yCounter++;
 			}
 		}
-		else
+		else //goes down left
 		{
-			for (int counter = startX + ONE; counter < indexX; counter++)
+			for (int i = startX - 1; i > indexX; i--)
 			{
-				if (board[yCounter][counter] != '#')
-				{
+				j--;
+				if (board[j][i] != '#')
 					throw moveException::invalidMove();
-				}
-				yCounter++;
 			}
 		}
 	}

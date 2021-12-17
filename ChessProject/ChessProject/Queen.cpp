@@ -1,6 +1,6 @@
 #include "Queen.h"
 
-Queen::Queen(const char x, const char y, const char name, const bool color) : Rook(x, y, name, color)
+Queen::Queen(const char x, const char y, const char name, const bool color) : Rook(x, y, name, color), Bishop(x, y, name, color)
 {
 }
 
@@ -22,7 +22,21 @@ void Queen::isValidMove(const string cords, const string* board, const bool curr
 		}
 		else
 		{
-			this->Rook::isValidMove(cords, board, currentColor);
+			try
+			{
+				this->Bishop::isValidMove(cords, board, currentColor);
+			}
+			catch(const char ee)
+			{
+				if (e == VALID)
+				{
+					throw moveException::validMove();
+				}
+				else
+				{
+					throw moveException::invalidMove();
+				}
+			}
 		}
 	}
 }
