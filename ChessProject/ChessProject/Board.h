@@ -1,4 +1,5 @@
 #pragma once
+#include "Bishop.h"
 #include "Queen.h"
 #include "King.h"
 #include "Rook.h"
@@ -11,6 +12,7 @@ class Board
 public:
 	Board(const bool startColor);
 	~Board();
+	void addSoldier();
 	bool getColor() const;
 	string* getCharBoard() const;
 	void updateCharBoard();

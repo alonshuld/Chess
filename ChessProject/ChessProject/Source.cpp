@@ -19,8 +19,9 @@ void main()
 	srand(time_t(NULL));
 	Board tempBoard(true);
 	Board board(true);
+	int size;
 	char answer[2];
-	char msgToGraphics[1024] = "RRRKQRRRRRRRRRRR################################rrrrrrrrrrrkqrrr";
+	char msgToGraphics[1024] = "RRBKQBRRRRRRRRRR################################rrrrrrrrrrbkqbrr";
 	Pipe p;
 	bool isConnect = p.connect();
 	string ans;
@@ -42,7 +43,7 @@ void main()
 			return;
 		}
 	}
-	answer[1] = NULL;
+	answer[ONE] = NULL;
 	board.getStartColor(msgToGraphics);
 	p.sendMessageToGraphics(msgToGraphics);   
 	string msgFromGraphics = p.getMessageFromGraphics();
@@ -57,13 +58,14 @@ void main()
 		{
 			if (e == VALID)
 			{
+				size = tempBoard.getBoard().size();
 				tempBoard = board;
 				tempBoard.killSoldier(msgFromGraphics);
 				tempBoard.updateCharBoard();
 			}
-			answer[0] = e;
+			answer[ZERO] = e;
 		}
-		if (answer[0] == VALID)
+		if (answer[ZERO] == VALID)
 		{
 			try
 			{
@@ -71,9 +73,9 @@ void main()
 			}
 			catch (const char e)
 			{
-				answer[0] = e;
+				answer[ZERO] = e;
 			}
-			if (answer[0] != WILL_BE_OWN_CHECK)
+			if (answer[ZERO] != WILL_BE_OWN_CHECK)
 			{
 				board.killSoldier(msgFromGraphics);
 				board.updateCharBoard();
@@ -83,9 +85,14 @@ void main()
 				}
 				catch (const char e)
 				{
-					answer[0] = e;
+					answer[ZERO] = e;
 				}
 				board.setColor();
+			}
+			else
+			{
+				if (tempBoard.getBoard().size() < size) // making sure tempBoard and board have the same amount of soldiers, if own chess happened Board will have 1 soldier more than tempBoard and it might cause to access of an unexisting item in temp board
+					tempBoard.addSoldier();
 			}
 		}
 		strcpy_s(msgToGraphics, answer); 
