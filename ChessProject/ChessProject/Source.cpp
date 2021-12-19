@@ -21,7 +21,7 @@ void main()
 	Board board(true);
 	int size;
 	char answer[2];
-	char msgToGraphics[1024] = "RRBKQBRRRRRRRRRR################################rrrrrrrrrrbkqbrr";
+	char msgToGraphics[1024] = "RNBKQBNRRRRRRRRR################################rrrrrrrrrnbkqbnr";
 	Pipe p;
 	bool isConnect = p.connect();
 	string ans;

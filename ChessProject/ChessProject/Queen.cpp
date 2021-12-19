@@ -22,21 +22,7 @@ void Queen::isValidMove(const string cords, const string* board, const bool curr
 		}
 		else
 		{
-			try
-			{
-				this->Bishop::isValidMove(cords, board, currentColor);
-			}
-			catch(const char ee)
-			{
-				if (e == VALID)
-				{
-					throw moveException::validMove();
-				}
-				else
-				{
-					throw moveException::invalidMove();
-				}
-			}
+			this->Bishop::isValidMove(cords, board, currentColor);
 		}
 	}
 }

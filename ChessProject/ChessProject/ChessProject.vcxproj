@@ -23,6 +23,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="FrontedText.h" />
     <ClInclude Include="King.h" />
+    <ClInclude Include="Knight.h" />
     <ClInclude Include="moveExceptions.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="Queen.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="FrontedText.cpp" />
     <ClCompile Include="King.cpp" />
+    <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Queen.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Soldier.cpp" />

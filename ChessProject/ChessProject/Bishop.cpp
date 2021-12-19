@@ -13,7 +13,7 @@ void Bishop::isValidMove(const string cords, const string* board, const bool cur
 	char newY = FrontedText::getXorY(cords, 3);
 	char currentX = this->getX();
 	char currentY = this->getY();
-	int testValid = 0;
+	int testValid;
 	int cx = turnCordToInt(currentX);
 	int nx = turnCordToInt(newX);
 	int cy = turnCordToInt(currentY);
@@ -36,8 +36,6 @@ void Bishop::isValidMove(const string cords, const string* board, const bool cur
 
 void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
-	//i = index in line
-	//j = lines
 	int j = startY;
 	int indexX = turnCordToInt(x);
 	int indexY = turnCordToInt(y);
