@@ -18,7 +18,7 @@ void Rook::isValidMove(const string cords, const string* board, const bool curre
 	checkIfCordsValid(newX, newY);
 	checkIfSourceIsRight(board, currentColor);
 	checkIfNotSameIndex(newX, newY);
-	if (((currentX == newX && currentY != newY) || (currentX != newX && currentY == newY)))// && (board[turnCordToInt(newY)][turnCordToInt(newX)] != 'k') && (board[turnCordToInt(newY)][turnCordToInt(newX)] != 'K'
+	if (((currentX == newX && currentY != newY) || (currentX != newX && currentY == newY)))
 	{
 		checkIfDestNotOwn(newX, newY, board);
 		checkIfNotRunOver(turnCordToInt(currentX), turnCordToInt(currentY), newX, newY, board);
