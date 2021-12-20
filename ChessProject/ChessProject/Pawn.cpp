@@ -10,19 +10,16 @@ Pawn::~Pawn()
 
 void Pawn::isValidMove(const string cords, const string* board, const bool currentColor)
 {
-	char newX = FrontedText::getXorY(cords, 2);
-	char newY = FrontedText::getXorY(cords, 3);
+	char newX = FrontedText::getXorY(cords, TWO);
+	char newY = FrontedText::getXorY(cords, THREE);
 	char currentX = this->getX();
 	char currentY = this->getY();
-	int newXNum = turnCordToInt(newX);
-	int newYNum = turnCordToInt(newY);
-	int currentXNum = turnCordToInt(currentXNum);
-	int currentYNum = turnCordToInt(currentYNum);
 	checkIfCordsValid(newX, newY);
 	checkIfSourceIsRight(board, currentColor);
 	checkIfNotSameIndex(newX, newY);
 	checkIfDestNotOwn(newX, newY, board);
-	if ((newYNum == currentYNum + 1) || (this->_firstMove && newYNum == currentYNum + 2) || (board[newYNum][newXNum] != '#' && (newXNum == currentXNum + 1 && newYNum == currentYNum + 1 || newXNum == currentXNum - 1 && newYNum == currentYNum + 1)))
+	if ((!this->getColor() && (newY == currentY - ONE && currentX == newX) || (this->_firstMove && newY == currentY - TWO) || (board[turnCordToInt(newY)][turnCordToInt(newX)] != '#' && (newX == currentX + ONE && newY == currentY - ONE || newX == currentX - ONE && newY == currentY - ONE)))
+		|| this->getColor() && (newY == currentY + ONE && currentX == newX) || ((this->_firstMove && newY == currentY + TWO) || (board[turnCordToInt(newY)][turnCordToInt(newX)] != '#' && (newX == currentX + ONE && newY == currentY + ONE || newX == currentX - ONE && newY == currentY + ONE))))
 	{
 		checkIfNotRunOver(turnCordToInt(currentX), turnCordToInt(currentY), newX, newY, board);
 	}
@@ -30,13 +27,17 @@ void Pawn::isValidMove(const string cords, const string* board, const bool curre
 	{
 		throw moveException::invalidMove();
 	}
+	this->_firstMove = false;
 	throw moveException::validMove();
 }
 
 void Pawn::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
-	if (startY + 1 == turnCordToInt(y) && startX == turnCordToInt(x))
+	int newY = turnCordToInt(y);
+	int newX = turnCordToInt(x);
+	if ((this->getColor() && startY + ONE == newY && startX == newX && board[newY][newX] != '#' || (startY + TWO == newY && startX == newX && board[newY][newX] != '#' && board[newY - ONE][newX] != '#'))
+		|| (!this->getColor() && startY - ONE == newY && startX == newX && board[newY][newX] != '#' || (startY - TWO == newY && startX == newX && board[newY][newX] != '#' && board[newY + ONE][newX] != '#')))
 	{
-		
+		throw moveException::invalidMove();
 	}
 }
