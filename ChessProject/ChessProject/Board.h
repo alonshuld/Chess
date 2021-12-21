@@ -16,6 +16,7 @@ public:
 	~Board();
 	void addSoldier();
 	bool getColor() const;
+	void boardMenu(Board* temp, char* answer, const string msgFrom);
 	string* getCharBoard() const;
 	void updateCharBoard();
 	void setColor();
@@ -29,6 +30,6 @@ public:
 
 private:
 	vector <Soldier*> _board;
-	string* charBoard;
+	string* _charBoard;
 	bool _currentColor; // white - false, black - true
 };

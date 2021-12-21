@@ -1,16 +1,32 @@
 #include "Knight.h"
+
+/*
+this function will creat Knight soldier
+input: x, y, name, color
+output: none
+*/
 Knight::Knight(const char x, const char y, const char name, const bool color) : Soldier(x, y, name, color)
 {
 }
 
+/*
+this function will be used as a Knight dtor
+input: none
+output: none
+*/
 Knight::~Knight()
 {
 }
 
+/*
+this function will check if the soldier is making a valid move or not
+input: cords, board, currentColor
+output: none
+*/
 void Knight::isValidMove(const string cords, const string* board, const bool currentColor)
 {
-	char newX = FrontedText::getXorY(cords, 2);
-	char newY = FrontedText::getXorY(cords, 3);
+	char newX = FrontedText::getXorY(cords, TWO);
+	char newY = FrontedText::getXorY(cords, THREE);
 	char currentX = this->getX();
 	char currentY = this->getY();
 	checkIfCordsValid(newX, newY);
@@ -29,6 +45,12 @@ void Knight::isValidMove(const string cords, const string* board, const bool cur
 	throw moveException::validMove();
 }
 
+
+/*
+this function will check if the soldier isnt running over other soldier while moving
+input: startX, startY, x, y, board
+output: none
+*/
 void Knight::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
 	checkIfDestNotOwn(x, y, board);

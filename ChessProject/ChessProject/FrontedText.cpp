@@ -1,11 +1,11 @@
 #include "FrontedText.h"
 
-char FrontedText::getXorY(const string cords, const int index)
 /*
-* get x or y from the cords
-* Input: cords message and the index
-* Output: the x or the y
+this function will receive the specific cord from index
+input: cords, index
+output: the specific cord
 */
+char FrontedText::getXorY(const string cords, const int index)
 {
 	return cords[index];
 }

@@ -3,14 +3,24 @@ Bishop::Bishop(const char x, const char y, const char name, const bool color) : 
 {
 }
 
+/*
+this function will be used as a bishop dtor
+input: none
+output: none
+*/
 Bishop::~Bishop()
 {
 }
 
+/*
+this function will check if the soldier is making a valid move or not
+input: cords, board, currentColor
+output: none
+*/
 void Bishop::isValidMove(const string cords, const string* board, const bool currentColor)
 {
-	char newX = FrontedText::getXorY(cords, 2);
-	char newY = FrontedText::getXorY(cords, 3);
+	char newX = FrontedText::getXorY(cords, TWO);
+	char newY = FrontedText::getXorY(cords, THREE);
 	char currentX = this->getX();
 	char currentY = this->getY();
 	int testValid;
@@ -34,6 +44,11 @@ void Bishop::isValidMove(const string cords, const string* board, const bool cur
 	throw moveException::validMove();
 }
 
+/*
+this function will check if the soldier isnt running over other soldier while moving
+input: startX, startY, x, y, board
+output: none
+*/
 void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
 	int j = startY;
@@ -43,7 +58,7 @@ void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x,
 	{
 		if (startX < indexX) // goes up right
 		{
-			for (int i = startX + 1; i < indexX; i++)
+			for (int i = startX + ONE; i < indexX; i++)
 			{
 				j++;
 				if (board[j][i] != '#')
@@ -52,7 +67,7 @@ void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x,
 		}
 		else //goes up left
 		{
-			for (int i = startX - 1; i > indexX; i--)
+			for (int i = startX - ONE; i > indexX; i--)
 			{
 				j++;
 				if (board[j][i] != '#')
@@ -64,7 +79,7 @@ void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x,
 	{
 		if (startX < indexX) // goes down right
 		{
-			for (int i = startX + 1; i < indexX; i++)
+			for (int i = startX + ONE; i < indexX; i++)
 			{
 				j--;
 				if (board[j][i] != '#')
@@ -73,7 +88,7 @@ void Bishop::checkIfNotRunOver(const int startX, const int startY, const char x,
 		}
 		else //goes down left
 		{
-			for (int i = startX - 1; i > indexX; i--)
+			for (int i = startX - ONE; i > indexX; i--)
 			{
 				j--;
 				if (board[j][i] != '#')

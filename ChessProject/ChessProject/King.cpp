@@ -1,17 +1,32 @@
 #include "King.h"
 
+/*
+this function will creat king soldier
+input: x, y, name, color
+output: none
+*/
 King::King(const char x, const char y, const char name, const bool color) : Soldier(x, y, name, color)
 {
 }
 
+/*
+this function will be used as a king dtor
+input: none
+output: none
+*/
 King::~King()
 {
 }
 
+/*
+this function will check if the soldier is making a valid move or not
+input: cords, board, currentColor
+output: none
+*/
 void King::isValidMove(const string cords, const string* board, const bool currentColor)
 {
-	char newX = FrontedText::getXorY(cords, 2);
-	char newY = FrontedText::getXorY(cords, 3);
+	char newX = FrontedText::getXorY(cords, TWO);
+	char newY = FrontedText::getXorY(cords, THREE);
 	char currentX = this->getX();
 	char currentY = this->getY();
 	checkIfCordsValid(newX, newY);
@@ -30,6 +45,12 @@ void King::isValidMove(const string cords, const string* board, const bool curre
 	throw moveException::validMove();
 }
 
+
+/*
+this function will check if the soldier isnt running over other soldier while moving
+input: startX, startY, x, y, board
+output: none
+*/
 void King::checkIfNotRunOver(const int startX, const int startY, const char x, const char y, const string* board) const
 {
 	checkIfDestNotOwn(x, y, board);
